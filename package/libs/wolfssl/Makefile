@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wolfssl
-PKG_VERSION:=3.14.4
-PKG_RELEASE:=3
+PKG_VERSION:=3.15.3-stable
+PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).zip
 # PKG_SOURCE_URL:=https://www.wolfssl.com/
 PKG_SOURCE_URL:=https://github.com/wolfSSL/wolfssl/archive/v$(PKG_VERSION)
-PKG_HASH:=1da1b45dec4a455716c8547074ad883c737865225f69443bb173c0dc21683fd1
+PKG_HASH:=dc97c07a7667b39a890e14f4b4a209f51524a4cabee7adb6c80822ee78c1f62a
 
 PKG_FIXUP:=libtool
 PKG_INSTALL:=1
@@ -40,9 +40,9 @@ define Package/libwolfssl
   CATEGORY:=Libraries
   TITLE:=wolfSSL library
   URL:=http://www.wolfssl.com/
-  MAINTAINER:=Alexandru Ardelean <ardeleanalex@gmail.com>
   MENU:=1
   PROVIDES:=libcyassl
+  ABI_VERSION:=18
 endef
 
 define Package/libwolfssl/description
@@ -168,8 +168,7 @@ endef
 
 define Package/libwolfssl/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwolfssl.so* $(1)/usr/lib/
-	ln -s libwolfssl.so $(1)/usr/lib/libcyassl.so
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwolfssl.so.* $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,libwolfssl))

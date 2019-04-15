@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 ARCH:=arm
 BOARD:=zynq
 BOARDNAME:=Xilinx Zynq 7000 SoCs
-FEATURES:=fpu gpio rtc usb usbgadget ramdisk targz
+FEATURES:=fpu gpio rtc usb usbgadget boot-part rootfs-part squashfs
 CPU_TYPE:=cortex-a9
 CPU_SUBTYPE:=neon
 MAINTAINER:=Jason Wu <jason.wu.misc@gmail.com>
@@ -26,6 +26,7 @@ include $(INCLUDE_DIR)/target.mk
 
 KERNELNAME:=Image dtbs
 
-DEFAULT_PACKAGES += uboot-envtools
+DEFAULT_PACKAGES += uboot-envtools mkf2fs e2fsprogs \
+	kmod-usb-storage kmod-fs-msdos
 
 $(eval $(call BuildTarget))
